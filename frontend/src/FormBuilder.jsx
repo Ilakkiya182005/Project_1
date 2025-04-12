@@ -327,7 +327,7 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-3 mt-6">
         <button
-          className="flex-1 sm:flex-none bg-white text-purple-600 px-4 py-2 rounded border border-purple-600 hover:bg-purple-50 flex items-center justify-center text-sm sm:text-base cursor-pointer"
+          className="flex-1 sm:flex-none bg-white text-purple-600 px-4 py-2 rounded border border-purple-600 hover:bg-purple-50 flex items-center justify-center text-sm sm:text-base"
           onClick={() => addQuestion()}
         >
           <FaPlus className="mr-2" size={12} />
@@ -335,12 +335,13 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
         </button>
         
         <button
-          className="flex-1 text-black px-4 py-2 rounded  flex items-center justify-center text-sm sm:text-base cursor-pointer"
-          onClick={handlePublish}
-        >
-          <FaPaperPlane className="mr-2" size={12} />
-          Publish
-        </button>
+  className="flex-1 text-black px-4 py-2 rounded flex items-center justify-center sm:justify-end text-sm sm:text-base cursor-pointer"
+  onClick={handlePublish}
+>
+  <FaPaperPlane className="mr-3" size={12} />
+  Publish
+</button>
+
       </div>
     </div>
   );
