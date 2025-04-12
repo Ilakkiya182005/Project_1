@@ -19,7 +19,8 @@ const FormResponder = () => {
         // Initialize responses object
         const initialResponses = {};
         response.data.questions.forEach(question => {
-          initialResponses[question.questionId] = question.type === 'checkbox' ? [] : '';
+          initialResponses[question.questionId] = question.type === 'checkbox' ? [] : question.type === 'date' ? '' : 
+          '';
         });
         setResponses(initialResponses);
       } catch (error) {
@@ -96,6 +97,16 @@ const FormResponder = () => {
                 onChange={(e) => handleResponseChange(question.questionId, e.target.value)}
                 required={question.required}
               />
+            )}
+            {/* After other input types */}
+            {question.type === 'date' && (
+                   <input
+                       type="date"
+                      className="w-full p-2 border-b border-gray-300 focus:border-purple-500 focus:outline-none"
+                      value={responses[question.questionId] || ''}
+                      onChange={(e) => handleResponseChange(question.questionId, e.target.value)}
+                      required={question.required}
+                  />
             )}
 
             {/* Paragraph Input */}
