@@ -4,8 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const questionTypes = [
-  { id: 'text', label: 'Short', icon: <FaAlignLeft />, mobileLabel: 'Short' },
-  { id: 'paragraph', label: 'Paragraph', icon: <FaAlignLeft />, mobileLabel: 'Para' },
+  { id: 'text', label: 'Short', icon: <FaAlignLeft />, mobileLabel: 'Text' },
+  { id: 'paragraph', label: 'Paragraph', icon: <FaAlignLeft />, mobileLabel: 'Long Text' },
   { id: 'radio', label: 'Multiple', icon: <FaCheck />, mobileLabel: 'Multi' },
   { id: 'checkbox', label: 'Checkboxes', icon: <FaCheckSquare />, mobileLabel: 'Check' },
   { id: 'date', label: 'Date', icon: <FaCalendarAlt />, mobileLabel: 'Date' },
@@ -183,8 +183,6 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
         return null;
     }
   };
-
-  // ... (keep all your existing functions unchanged until the return statement)
 
   return (
     <div className="container mx-auto max-w-3xl p-3 sm:p-5">
