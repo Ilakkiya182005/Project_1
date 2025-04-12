@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+body {
+  background-color: #f0ebf8;
+}
+
+/* Form Header */
+.form-header {
+  background-color: white;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Question Container */
+.question-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Question Input */
+.question-input {
+  flex-grow: 1;
+  font-size: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dadce0;
+}
+
+.question-input:focus {
+  outline: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #673ab7;
+  margin-bottom: -1px;
+}
+
+/* Type Button */
+.type-button {
+  background: none;
+  border: none;
+  color: #5f6368;
+  font-size: 0.875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.type-button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Option Input */
+.option-input {
+  flex-grow: 1;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dadce0;
+}
+
+.option-input:focus {
+  outline: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #673ab7;
+  margin-bottom: -1px;
+}
+
+/* Add Option */
+.add-option {
+  color: #673ab7;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Switch/Toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: .4s;
+  border-radius: 1.25rem;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1rem;
+  width: 1rem;
+  left: 0.125rem;
+  bottom: 0.125rem;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #673ab7;
+}
+
+input:checked + .slider:before {
+  transform: translateX(1.25rem);
+}
+
+/* Error States */
+.error-message {
+  color: #d32f2f;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.error {
+  border-color: #d32f2f !important;
+}
+
+@media (max-width: 640px) {
+  .responsive-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
