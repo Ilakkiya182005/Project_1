@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { FaPlus, FaTrash, FaPaperPlane, FaChevronDown, FaCheck, FaArrowDown, FaAlignLeft, FaListUl, FaCheckSquare, FaCalendarAlt, FaCopy } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaPaperPlane, FaChevronDown, FaCheck, FaAlignLeft, FaCheckSquare, FaCalendarAlt, FaCopy } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const questionTypes = [
-  { id: 'text', label: 'Short Answer', icon: <FaAlignLeft /> },
-  { id: 'paragraph', label: 'Paragraph', icon: <FaAlignLeft /> },
-  { id: 'radio', label: 'Multiple Choice', icon: <FaCheck /> },
-  { id: 'checkbox', label: 'Checkboxes', icon: <FaCheckSquare /> },
-  { id: 'date', label: 'Date', icon: <FaCalendarAlt /> },
+  { id: 'text', label: 'Short', icon: <FaAlignLeft />, mobileLabel: 'Short' },
+  { id: 'paragraph', label: 'Paragraph', icon: <FaAlignLeft />, mobileLabel: 'Para' },
+  { id: 'radio', label: 'Multiple', icon: <FaCheck />, mobileLabel: 'Multi' },
+  { id: 'checkbox', label: 'Checkboxes', icon: <FaCheckSquare />, mobileLabel: 'Check' },
+  { id: 'date', label: 'Date', icon: <FaCalendarAlt />, mobileLabel: 'Date' },
 ];
 
 const FormBuilder = ({ publishedData, setPublishedData }) => {
@@ -132,20 +132,20 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
   
   if (isPublished) {
     return (
-      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Form Published!</h2>
-        <p className="mb-4">Share this link with respondents:</p>
+      <div className="max-w-2xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4">Form Published!</h2>
+        <p className="mb-4 text-sm sm:text-base">Share this link with respondents:</p>
         
-        <div className="flex items-center mb-6 p-3 bg-gray-100 rounded">
+        <div className="flex items-center mb-6 p-2 sm:p-3 bg-gray-100 rounded">
           <input
             type="text"
             value={link}
             readOnly
-            className="flex-1 bg-transparent outline-none"
+            className="flex-1 bg-transparent outline-none text-xs sm:text-sm"
           />
           <button
             onClick={copyToClipboard}
-            className="ml-2 text-primary hover:text-primary-dark flex items-center"
+            className="ml-2 text-primary hover:text-primary-dark flex items-center text-sm sm:text-base"
             title="Copy to clipboard"
           >
             <FaCopy className="mr-1" />
@@ -153,16 +153,16 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
           </button>
         </div>
         
-        <div className="flex space-x-3">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
           <button
             onClick={() => setPublishedData({...publishedData, isPublished: false})}
-            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm sm:text-base"
           >
             Back to Form
           </button>
           <button
             onClick={() => navigate(`/responses/${formId}`)}
-            className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+            className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm sm:text-base"
           >
             View Responses
           </button>
@@ -174,21 +174,24 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
   const renderQuestionContent = (question) => {
     switch(question.type) {
       case 'text':
-        return <input type="text" className="text-input w-full py-2" disabled placeholder="Short answer text" />;
+        return <input type="text" className="text-input w-full py-2 px-1 text-sm sm:text-base" disabled placeholder="Short answer text" />;
       case 'paragraph':
-        return <textarea className="text-input w-full py-2" disabled placeholder="Long answer text" rows="3"></textarea>;
+        return <textarea className="text-input w-full py-2 px-1 text-sm sm:text-base" disabled placeholder="Long answer text" rows="3"></textarea>;
       case 'date':
-        return <input type="date" className="text-input w-full py-2" disabled />;
+        return <input type="date" className="text-input w-full py-2 px-1 text-sm sm:text-base" disabled />;
       default:
         return null;
     }
   };
 
+  // ... (keep all your existing functions unchanged until the return statement)
+
   return (
-    <div className="container mx-auto max-w-3xl p-5">
-      <div className="form-header p-6 mb-3">
+    <div className="container mx-auto max-w-3xl p-3 sm:p-5">
+      {/* Form Header */}
+      <div className="form-header p-4 sm:p-6 mb-3">
         <h1 
-          className="text-3xl font-normal mb-4 border-b border-transparent pb-2 focus:border-border focus:outline-none" 
+          className="text-xl sm:text-3xl font-normal mb-3 sm:mb-4 border-b border-transparent pb-2 focus:border-border focus:outline-none" 
           contentEditable 
           onBlur={(e) => setFormTitle(e.target.textContent)}
           suppressContentEditableWarning
@@ -196,7 +199,7 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
           {formTitle}
         </h1>
         <div 
-          className="text-text-secondary text-sm border-b border-transparent pb-2 focus:border-border focus:outline-none" 
+          className="text-text-secondary text-xs sm:text-sm border-b border-transparent pb-2 focus:border-border focus:outline-none" 
           contentEditable 
           onBlur={(e) => setFormDescription(e.target.textContent)}
           suppressContentEditableWarning
@@ -205,100 +208,114 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
         </div>
       </div>
 
+      {/* Questions List */}
       {questions.map((q, index) => (
-        <div key={q.id} className="question-container p-6 mb-3">
-          <div className="flex items-center mb-4">
+        <div key={q.id} className="question-container p-4 sm:p-6 mb-3 rounded-lg bg-white shadow-sm">
+          {/* Question Header Row */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+            {/* Question Input */}
             <input
               type="text"
-              className="question-input"
+              className="question-input flex-1 py-2 px-3 text-sm sm:text-base border-b border-gray-300 focus:border-purple-500 focus:outline-none"
               placeholder="Question"
               value={q.question}
               onChange={(e) => updateQuestion(q.id, 'question', e.target.value)}
             />
             
-            <div className="relative ml-4">
-              <button 
-                className="type-button"
-                onClick={() => toggleMenu(q.id)}
-              >
-                {questionTypes.find(t => t.id === q.type)?.label}
-                <FaChevronDown className="ml-1" />
-              </button>
-              
-              {activeMenu === q.id && (
-                <div className="absolute top-full left-0 bg-white rounded shadow-md w-48 z-10">
-                  {questionTypes.map(type => (
-                    <div
-                      key={type.id}
-                      className="flex items-center px-4 py-3 hover:bg-secondary cursor-pointer"
-                      onClick={() => changeQuestionType(q.id, type.id)}
-                    >
-                      <span className="mr-3">{type.icon}</span>
-                      {type.label}
-                    </div>
-                  ))}
+            {/* Question Type Dropdown */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="relative">
+                <button 
+                  className="flex items-center justify-between bg-gray-100 hover:bg-gray-200 rounded px-3 py-2 text-xs sm:text-sm min-w-[80px] sm:min-w-[120px] transition-colors"
+                  onClick={() => toggleMenu(q.id)}
+                >
+                  <span className="hidden sm:inline">{questionTypes.find(t => t.id === q.type)?.label}</span>
+                  <span className="sm:hidden">{questionTypes.find(t => t.id === q.type)?.mobileLabel}</span>
+                  <FaChevronDown className="ml-2" size={12} />
+                </button>
+                
+                {activeMenu === q.id && (
+                  <div className="absolute z-20 mt-1 w-full sm:w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                    {questionTypes.map(type => (
+                      <div
+                        key={type.id}
+                        className="flex items-center px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                        onClick={() => changeQuestionType(q.id, type.id)}
+                      >
+                        <span className="mr-2 text-gray-600">{type.icon}</span>
+                        <span className="sm:hidden">{type.mobileLabel}</span>
+                        <span className="hidden sm:inline">{type.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Required Toggle */}
+              <label className="flex items-center text-xs sm:text-sm whitespace-nowrap">
+                <div className="switch mr-1">
+                  <input
+                    type="checkbox"
+                    checked={q.required}
+                    onChange={(e) => updateQuestion(q.id, 'required', e.target.checked)}
+                    className="opacity-0 w-0 h-0"
+                  />
+                  <span className="slider"></span>
                 </div>
+                Required
+              </label>
+
+              {/* Delete Button (not for first question) */}
+              {index > 0 && (
+                <button
+                  className="text-gray-500 hover:text-red-500 p-1"
+                  onClick={() => removeQuestion(q.id)}
+                  aria-label="Delete question"
+                >
+                  <FaTrash size={14} />
+                </button>
               )}
             </div>
-            
-            <label className="flex items-center text-text-secondary text-sm ml-4">
-              <div className="switch">
-                <input
-                  type="checkbox"
-                  checked={q.required}
-                  onChange={(e) => updateQuestion(q.id, 'required', e.target.checked)}
-                  className="opacity-0 w-0 h-0"
-                />
-                <span className="slider"></span>
-              </div>
-              <span className="ml-2">Required</span>
-            </label>
-            
-            {index > 0 && (
-              <button
-                className="ml-4 text-text-secondary hover:text-error"
-                onClick={() => removeQuestion(q.id)}
-              >
-                <FaTrash />
-              </button>
-            )}
           </div>
-          
-          <div className="ml-6">
+
+          {/* Question Content */}
+          <div className="ml-0 sm:ml-6">
             {renderQuestionContent(q)}
             
+            {/* Options for radio/checkbox */}
             {(q.type === 'radio' || q.type === 'checkbox') && (
-              <div className="mt-4">
+              <div className="mt-3 space-y-2">
                 {q.options.map((option, i) => (
-                  <div key={i} className="flex items-center mb-3">
+                  <div key={i} className="flex items-center gap-2">
                     <input
                       type={q.type === 'checkbox' ? 'checkbox' : 'radio'}
                       disabled
-                      className="mr-3"
+                      className="flex-none"
                     />
                     <input
                       type="text"
-                      className="option-input"
+                      className="option-input flex-1 py-1 px-2 text-sm sm:text-base border-b border-gray-300 focus:border-purple-500 focus:outline-none"
                       placeholder={`Option ${i + 1}`}
                       value={option}
                       onChange={(e) => updateOption(q.id, i, e.target.value)}
                     />
                     {i >= 2 && (
                       <button
-                        className="ml-2 text-text-secondary hover:text-error"
+                        className="text-gray-400 hover:text-red-500 p-1"
                         onClick={() => removeOption(q.id, i)}
+                        aria-label="Remove option"
                       >
-                        <FaTrash size={14} />
+                        <FaTrash size={12} />
                       </button>
                     )}
                   </div>
                 ))}
                 
                 <button
-                  className="add-option"
+                  className="mt-2 text-xs sm:text-sm text-purple-600 hover:text-purple-800 flex items-center"
                   onClick={() => addOption(q.id)}
                 >
-                  <FaPlus className="mr-2" />
+                  <FaPlus className="mr-1" size={10} />
                   Add Option
                 </button>
               </div>
@@ -306,25 +323,24 @@ const FormBuilder = ({ publishedData, setPublishedData }) => {
           </div>
         </div>
       ))}
-      
-      <div className="flex justify-between mt-6">
+
+      {/* Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-3 mt-6">
         <button
-          className="bg-white text-primary px-6 py-2 rounded border border-border hover:bg-secondary flex items-center"
+          className="flex-1 sm:flex-none bg-white text-purple-600 px-4 py-2 rounded border border-purple-600 hover:bg-purple-50 flex items-center justify-center text-sm sm:text-base cursor-pointer"
           onClick={() => addQuestion()}
         >
-          <FaPlus className="mr-2" />
+          <FaPlus className="mr-2" size={12} />
           Add Question
         </button>
         
-        <div className="flex gap-3">
-          <button
-            className="bg-primary text-black px-6 py-2 rounded hover:bg-primary-dark flex items-center"
-            onClick={handlePublish}
-          >
-            <FaPaperPlane className="mr-2" />
-            Publish
-          </button>
-        </div>
+        <button
+          className="flex-1 text-black px-4 py-2 rounded  flex items-center justify-center text-sm sm:text-base cursor-pointer"
+          onClick={handlePublish}
+        >
+          <FaPaperPlane className="mr-2" size={12} />
+          Publish
+        </button>
       </div>
     </div>
   );
