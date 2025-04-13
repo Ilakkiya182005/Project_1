@@ -1,3 +1,7 @@
+Video Link : https://drive.google.com/file/d/1XxtP02ElH28dpBXAIm3Ihq2gdiQOMUKB/view?usp=sharing
+
+Deployed Link : https://stupendous-sherbet-865447.netlify.app/
+
 BACKEND
 
  * Users can create forms
@@ -22,5 +26,13 @@ FRONTEND
 
    Allows copying link and navigating to responses.
 
-* FormRes
+* FormResponder.jsx
+
+   By the link the User can fill the form
+
+* ResponseViewer.jsx
+
+  All the Response will be shown for the Admin who published the form
+
+
 
